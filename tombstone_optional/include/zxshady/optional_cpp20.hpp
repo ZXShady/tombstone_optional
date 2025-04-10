@@ -47,7 +47,7 @@ namespace tombstone_optional_details {
   concept MoveAssignable = std::is_move_assignable_v<T>;
 
   template<typename T>
-  concept TriviallyCopyConstructible = CopyConstructible<T> && std::is_trivially_copyable_v<T>;
+  concept TriviallyCopyConstructible = CopyConstructible<T> && std::is_trivially_copy_constructible_v<T>;
 
   template<typename T>
   concept TriviallyCopyAssignable = CopyAssignable<T> && std::is_trivially_copy_assignable_v<T>;
@@ -425,6 +425,7 @@ private:
     std::remove_cv_t<T> mValue;
   };
 };
+
 
 
 template<typename T, typename Interface>
