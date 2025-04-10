@@ -35,7 +35,7 @@ TEST_CASE("NonNegOpt assignment value tests", "[NonNegOpt][assignment]")
   // Test assignment from a moved object
   o1 = std::move(o2);
   REQUIRE(*o1 == 12);
-  NonNegOpt<short> o4 = 42;
+  NonNegOpt<short> o4 = short(42);
   o1                  = o4;
   REQUIRE(*o1 == 42);
 
