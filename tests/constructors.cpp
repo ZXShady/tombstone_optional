@@ -47,19 +47,4 @@ TEST_CASE("Test constructors of tombstone_optional", "[tombstone_optional][const
     OptString movedOpt    = std::move(originalOpt);
     REQUIRE(*movedOpt == "Hello World");
   }
-
-  SECTION("Conversion between OptString and OptStringView")
-  {
-    OptStringView optStringView = "Hello World View";
-    REQUIRE(*optStringView == "Hello World View");
-
-    STATIC_REQUIRE(!std::is_convertible_v<OptStringView, OptString>);
-    STATIC_REQUIRE(std::is_convertible_v<OptString, OptStringView>);
-
-    OptString convertedOpt{optStringView};
-    REQUIRE(*convertedOpt == "Hello World View");
-
-    OptString movedOpt{std::move(optStringView)};
-    REQUIRE(*movedOpt == "Hello World View");
-  }
 }

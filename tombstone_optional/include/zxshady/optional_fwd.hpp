@@ -4,7 +4,7 @@
 #endif
 
 #if __cplusplus >= 202002L
-#include "optional_cpp20.hpp"
+#include "optional_cpp20_fwd.hpp"
 #else
 #error ZXShady tombstone_optional is only usable in C++20 currently
 #endif

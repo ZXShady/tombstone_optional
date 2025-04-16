@@ -4,7 +4,7 @@ TEST_CASE("swap value", "[swap][value]")
 {
   OptString a = "Hello";
   OptString b = "World";
-  a.swap(b);
+  swap(a,b);
   REQUIRE(*a == "World");
   REQUIRE(*b == "Hello");
 }
@@ -21,7 +21,7 @@ TEST_CASE("Swap null with value", "[swap][nullopt]")
 {
   OptString a;
   OptString b = "I should be null";
-  a.swap(b);
-  REQUIRE(!b);
+  swap(a,b);
+  REQUIRE(!b.has_value());
   REQUIRE(*a == "I should be null");
 }

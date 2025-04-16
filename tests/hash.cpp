@@ -33,7 +33,6 @@ TEST_CASE("Hashing", "[hash]")
 
   SECTION("Hashing with std::unordered_set")
   {
-
     const OptString opt1 = "Test1";
     const OptString opt2 = "Test2";
     const OptString opt3 = opt1;

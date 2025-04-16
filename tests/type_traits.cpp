@@ -88,7 +88,7 @@ TEMPLATE_TEST_CASE("Traits",
   TRAIT_EQUAL(std::is_copy_constructible);
   TRAIT_EQUAL(std::is_move_constructible);
 
-  if constexpr (zxshady::concepts::tombstone_optional_trivial_destroy_interface_for<typename O::interface, T>) {
+  if constexpr (zxshady::concepts::tombstone_trivial_destroy_traits_for<typename O::traits_type, T>) {
     TRAIT_EQUAL(std::is_copy_assignable);
     TRAIT_EQUAL(std::is_move_assignable);
   }
@@ -97,7 +97,7 @@ TEMPLATE_TEST_CASE("Traits",
 
   TRAIT_EQUAL(std::is_trivially_copy_constructible);
   TRAIT_EQUAL(std::is_trivially_move_constructible);
-  if constexpr (zxshady::concepts::tombstone_optional_trivial_destroy_interface_for<typename O::interface, T>) {
+  if constexpr (zxshady::concepts::tombstone_trivial_destroy_traits_for<typename O::traits_type, T>) {
     TRAIT_EQUAL(std::is_trivially_copy_assignable);
     TRAIT_EQUAL(std::is_trivially_move_assignable);
   }

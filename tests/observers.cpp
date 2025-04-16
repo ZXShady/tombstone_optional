@@ -2,17 +2,17 @@
 
 struct did_i_move {
   did_i_move() : yes(false) {};
-  did_i_move(did_i_move&& that) { that.yes = true; }
+  did_i_move(did_i_move&& that) : yes(false) { that.yes = true; }
   bool yes;
 };
 
 template<>
 struct Interface<did_i_move> {
-  static bool is_null(const did_i_move& x) noexcept { return Interface<bool>::is_null(x.yes); }
+  static bool is_null(const did_i_move& x) noexcept { return zxshady::tombstone_traits<bool>::is_null(x.yes); }
   static void initialize_null_state(did_i_move& x) noexcept
   {
     ::new (&x) did_i_move();
-    Interface<bool>::initialize_null_state(x.yes);
+    zxshady::tombstone_traits<bool>::initialize_null_state(x.yes);
   }
 };
 

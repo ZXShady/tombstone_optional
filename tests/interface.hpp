@@ -63,9 +63,9 @@ struct DefaultConstructorInterface {
 
 template<typename String>
 struct StringSetToNullInterface {
-  static bool is_null(const String& x) noexcept { return x == "[std::nullopt]"; }
-  static void initialize_null_state(String& x) noexcept { ::new (&x) String("[std::nullopt]"); }
-  static void destroy_null_state(String& x) noexcept { x.~String(); }
+  static constexpr bool is_null(const String& x) noexcept { return x == String("\0\0", 2); }
+  static constexpr void initialize_null_state(String& x) noexcept { std::construct_at(&x,"\0\0", 2); }
+  static constexpr void destroy_null_state(String& x) noexcept { x.~String(); }
 };
 
 using OptString     = zxshady::tombstone_optional<std::string, StringSetToNullInterface<std::string>>;
@@ -89,17 +89,10 @@ private:
   friend struct Interface<NonNeg>;
 };
 
-template<>
-struct Interface<bool> {
-  static constexpr unsigned char secret_value = 0b0000'0010;
-  static_assert(sizeof(unsigned char) == sizeof(bool), "");
-  static bool is_null(bool x) noexcept { return std::memcmp(&x, &secret_value, sizeof(x)) == 0; }
-  static void initialize_null_state(bool& x) noexcept { std::memcpy(&x, &secret_value, sizeof(x)); }
-  //static void destroy_null_state(T& x) noexcept { }
-};
-
 template<typename T>
 struct Interface<NonNeg<T>> {
+  using storage_type = NonNeg<T>;
+
   static constexpr bool is_null(NonNeg<T> x) noexcept { return x.value == -1; }
   static constexpr void initialize_null_state(NonNeg<T>& x) noexcept
   {

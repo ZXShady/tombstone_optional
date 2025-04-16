@@ -27,7 +27,7 @@ endif()
 set(SRCS 
   ""
 )
-file(GLOB_RECURSE SRCS "*.cpp" "*.hpp" ".h")
+file(GLOB_RECURSE SRCS "*.cpp" "*.hpp")
 
 target_sources(tests PRIVATE
   ${SRCS}
